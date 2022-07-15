@@ -41,6 +41,8 @@ public class PlaceServiceImpl implements PlaceService {
         if (place == null) {
             throw new NullPointerException();
         }
+        //da napravim sobsven exception
+
         Forecast forecast = forecastService.getForecast(place.getLon().toString(), place.getLat().toString());
 
         WeatherResponse weatherResponse = WeatherResponse.builder()
