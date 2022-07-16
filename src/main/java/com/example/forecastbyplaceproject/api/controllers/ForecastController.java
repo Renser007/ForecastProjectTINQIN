@@ -2,6 +2,7 @@ package com.example.forecastbyplaceproject.api.controllers;
 
 import com.example.forecastbyplaceproject.api.models.WeatherRequest;
 import com.example.forecastbyplaceproject.api.models.WeatherResponse;
+import com.example.forecastbyplaceproject.data.exceptions.CustomException;
 import com.example.forecastbyplaceproject.domain.interfaces.ForecastExecutor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class ForecastController {
     }
 
     @PostMapping("/getWeather")
-    public WeatherResponse getWeather(@RequestBody WeatherRequest weatherRequest){
+    public WeatherResponse getWeather(@RequestBody WeatherRequest weatherRequest) throws CustomException {
         return forecastExecutor.execute(weatherRequest);
     }
 
