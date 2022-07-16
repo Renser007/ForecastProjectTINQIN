@@ -3,10 +3,12 @@ package com.example.forecastbyplaceproject.data.services;
 import com.example.forecastbyplaceproject.data.entities.forecast.Forecast;
 import com.example.forecastbyplaceproject.data.resttemplate.implement.RestTemplateProviderImpl;
 import com.example.forecastbyplaceproject.data.services.interfaces.ForecastService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Primary
 public class ForecastServiceImpl implements ForecastService {
 
     private final RestTemplateProviderImpl restTemplateProvider;

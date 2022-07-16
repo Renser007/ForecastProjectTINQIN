@@ -1,10 +1,11 @@
 package com.example.forecastbyplaceproject.data.services;
 
 import com.example.forecastbyplaceproject.api.models.WeatherRequest;
-import com.example.forecastbyplaceproject.api.models.WeatherResponse;
 import com.example.forecastbyplaceproject.data.entities.Country;
 import com.example.forecastbyplaceproject.data.entities.Place;
+import com.example.forecastbyplaceproject.data.entities.mappers.WeatherResponseMapper;
 import com.example.forecastbyplaceproject.data.entities.forecast.Forecast;
+import com.example.forecastbyplaceproject.data.exceptions.CustomException;
 import com.example.forecastbyplaceproject.data.repositories.CountryRepository;
 import com.example.forecastbyplaceproject.data.repositories.PlaceRepository;
 import com.example.forecastbyplaceproject.data.services.interfaces.ForecastService;
@@ -26,26 +27,25 @@ public class PlaceServiceImpl implements PlaceService {
 
 
     @Override
-    public WeatherResponse getWeatherByCountry(WeatherRequest weatherRequest) {
+    public WeatherResponseMapper getWeatherByCountry(WeatherRequest weatherRequest) throws CustomException {
 
 
 
         Country country = countryRepository.getCountriesByCountryName(weatherRequest.getCountry());
 
         if (country == null) {
-            throw new NullPointerException();
+            throw new CustomException("Country doesn't exist!");
         }
 
         Place place = placeRepository.findByCountryAndPlaceName(country, weatherRequest.getPlace());
 
         if (place == null) {
-            throw new NullPointerException();
+            throw new CustomException("Place doesn't exist!");
         }
-        //da napravim sobsven exception
 
         Forecast forecast = forecastService.getForecast(place.getLon().toString(), place.getLat().toString());
 
-        WeatherResponse weatherResponse = WeatherResponse.builder()
+        WeatherResponseMapper weatherResponseMapper = WeatherResponseMapper.builder()
                 .place(place.getPlaceName())
                 .country(place.getCountry().getCountryName())
                 .type(place.getType().getTypeName())
@@ -53,6 +53,6 @@ public class PlaceServiceImpl implements PlaceService {
                 .localTime(forecast.getLocation().getLocaltime())
                 .build();
 
-        return weatherResponse;
+        return weatherResponseMapper;
     }
 }
