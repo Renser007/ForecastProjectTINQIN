@@ -1,4 +1,4 @@
-package com.example.forecastbyplaceproject.data.services.placecrud;
+package com.example.forecastbyplaceproject.domain.services.placecrud;
 
 import com.example.forecastbyplaceproject.api.models.placecrud.PlaceCreateRequest;
 import com.example.forecastbyplaceproject.data.entities.Country;
@@ -7,7 +7,7 @@ import com.example.forecastbyplaceproject.data.entities.Type;
 import com.example.forecastbyplaceproject.data.repositories.CountryRepository;
 import com.example.forecastbyplaceproject.data.repositories.PlaceRepository;
 import com.example.forecastbyplaceproject.data.repositories.TypeRepository;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceCreateService;
+import com.example.forecastbyplaceproject.domain.services.placecrud.interfaces.PlaceCreateService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,15 +1,13 @@
 package com.example.forecastbyplaceproject.domain;
 
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceCreateRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceEditRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceGetResponse;
+import com.example.forecastbyplaceproject.api.models.placecrud.*;
 import com.example.forecastbyplaceproject.data.entities.mappers.PlaceGetResponseMapper;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceCreateService;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceDeleteService;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceGetService;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceUpdateService;
 import com.example.forecastbyplaceproject.domain.interfaces.PlaceExecutor;
+import com.example.forecastbyplaceproject.domain.services.placecrud.interfaces.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaceExecutorImpl implements PlaceExecutor {
@@ -19,11 +17,14 @@ public class PlaceExecutorImpl implements PlaceExecutor {
     private  final PlaceDeleteService placeDeleteService;
     private final PlaceUpdateService placeUpdateService;
 
-    public PlaceExecutorImpl(PlaceCreateService placeCreateService, PlaceGetService placeGetService, PlaceDeleteService placeDeleteService, PlaceUpdateService placeUpdateService) {
+    private final PlaceFindService placeFindService;
+
+    public PlaceExecutorImpl(PlaceCreateService placeCreateService, PlaceGetService placeGetService, PlaceDeleteService placeDeleteService, PlaceUpdateService placeUpdateService, PlaceFindService placeFindService) {
         this.placeCreateService = placeCreateService;
         this.placeGetService = placeGetService;
         this.placeDeleteService = placeDeleteService;
         this.placeUpdateService = placeUpdateService;
+        this.placeFindService = placeFindService;
     }
 
     @Override
@@ -52,5 +53,19 @@ public class PlaceExecutorImpl implements PlaceExecutor {
     @Override
     public void updatePlace(PlaceEditRequest placeEditRequest, Long id) {
         placeUpdateService.updatePlace(placeEditRequest,id);
+    }
+
+    @Override
+    public List<PlaceFindResponse> findPlacesWithCorrectName(String placeName) {
+        return placeFindService.findPlaceByName(placeName)
+                .stream()
+                .map(p ->
+                        PlaceFindResponse.builder()
+                        .placeName(p.getPlaceName())
+                        .country(p.getCountry())
+                        .lat(p.getLat())
+                        .lon(p.getLon())
+                        .type(p.getType())
+                        .build()).collect(Collectors.toList());
     }
 }

@@ -1,8 +1,8 @@
-package com.example.forecastbyplaceproject.data.services.placecrud;
+package com.example.forecastbyplaceproject.domain.services.placecrud;
 
 
 import com.example.forecastbyplaceproject.data.repositories.PlaceRepository;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceDeleteService;
+import com.example.forecastbyplaceproject.domain.services.placecrud.interfaces.PlaceDeleteService;
 import org.springframework.stereotype.Service;
 
 @Service
