@@ -1,9 +1,9 @@
-package com.example.forecastbyplaceproject.data.services.placecrud;
+package com.example.forecastbyplaceproject.domain.services.placecrud;
 
 import com.example.forecastbyplaceproject.api.models.placecrud.PlaceEditRequest;
 import com.example.forecastbyplaceproject.data.entities.Place;
 import com.example.forecastbyplaceproject.data.repositories.PlaceRepository;
-import com.example.forecastbyplaceproject.data.services.placecrud.interfaces.PlaceUpdateService;
+import com.example.forecastbyplaceproject.domain.services.placecrud.interfaces.PlaceUpdateService;
 import org.springframework.stereotype.Service;
 
 @Service

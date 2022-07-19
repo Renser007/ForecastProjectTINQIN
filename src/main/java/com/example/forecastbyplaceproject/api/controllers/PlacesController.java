@@ -1,10 +1,10 @@
 package com.example.forecastbyplaceproject.api.controllers;
 
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceCreateRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceEditRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceGetResponse;
+import com.example.forecastbyplaceproject.api.models.placecrud.*;
 import com.example.forecastbyplaceproject.domain.interfaces.PlaceExecutor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PlacesController {
@@ -31,10 +31,15 @@ public class PlacesController {
         placeExecutor.deletePlace(id);
     }
 
-    @GetMapping("/place{ID}")
+    @GetMapping("/place/{ID}")
     public PlaceGetResponse getPlaceById(@PathVariable Long ID){
 
         return placeExecutor.getPlaceById(ID); //po id
+    }
+
+    @GetMapping("/place")
+    public List<PlaceFindResponse> findPlacesWithCorrectName(@RequestParam String placeName){
+        return placeExecutor.findPlacesWithCorrectName(placeName);
     }
 
 

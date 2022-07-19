@@ -1,4 +1,4 @@
-package com.example.forecastbyplaceproject.data.services.placecrud.interfaces;
+package com.example.forecastbyplaceproject.domain.services.placecrud.interfaces;
 
 import com.example.forecastbyplaceproject.data.entities.mappers.PlaceGetResponseMapper;
 

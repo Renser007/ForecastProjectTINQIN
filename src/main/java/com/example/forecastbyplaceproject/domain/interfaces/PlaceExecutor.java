@@ -1,8 +1,8 @@
 package com.example.forecastbyplaceproject.domain.interfaces;
 
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceCreateRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceEditRequest;
-import com.example.forecastbyplaceproject.api.models.placecrud.PlaceGetResponse;
+import com.example.forecastbyplaceproject.api.models.placecrud.*;
+
+import java.util.List;
 
 public interface PlaceExecutor {
 
@@ -13,6 +13,8 @@ public interface PlaceExecutor {
     void deletePlace(Long id);
 
     void updatePlace(PlaceEditRequest placeEditRequest, Long id);
+
+    List<PlaceFindResponse> findPlacesWithCorrectName(String placeName);
 
 
 }

@@ -7,6 +7,7 @@ import lombok.*;
 @Setter(AccessLevel.PRIVATE)
 @ToString
 public class WeatherRequest {
+    private Boolean isFahrenheit;
     private String place;
     private String country;
 }
